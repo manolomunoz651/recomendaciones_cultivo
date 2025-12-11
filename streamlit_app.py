@@ -3,8 +3,8 @@ import pandas as pd
 import joblib
 
 # Cargar el modelo y el label encoder
-modelo2 = joblib.load("../modelos/modelo_rf_all.pkl")
-le2 = joblib.load("../modelos/label_encoder_all.pkl")
+modelo2 = joblib.load("modelo_rf_all.pkl")
+le2 = joblib.load("label_encoder_all.pkl")
 
 # Variables usadas en el modelo 2 (todas las variables)
 todas_vars = list(modelo2.feature_names_in_)
