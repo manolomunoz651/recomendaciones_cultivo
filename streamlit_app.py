@@ -28,9 +28,9 @@ def set_background(image_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Usa la función (asegúrate de que la imagen esté en la misma carpeta o da la ruta correcta)
-set_background('fondo.png')  # Cambia 'fondo.jpg' por tu archivo de imagen
+set_background('fondo.png.png')  # Cambia 'fondo.jpg' por tu archivo de imagen
 
-st.title("¡Hola! Esta app tiene fondo personalizado")
+#st.title("¡Hola! Esta app tiene fondo personalizado")
 
 # Variables usadas en el modelo 2 (todas las variables)
 todas_vars = list(modelo2.feature_names_in_)
