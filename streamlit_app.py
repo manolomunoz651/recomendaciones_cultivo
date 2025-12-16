@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import base64
 
 # Cargar el modelo y el label encoder
 modelo2 = joblib.load("modelo_rf_all.pkl")
@@ -16,7 +17,7 @@ def set_transparent_background(image_file, opacity=0.5):
     """
     with open(image_file, "rb") as f:
         image_data = f.read()
-    import base64
+    
     encoded = base64.b64encode(image_data).decode()
 
     page_bg = f"""
@@ -43,7 +44,7 @@ def set_transparent_background(image_file, opacity=0.5):
     st.markdown(page_bg, unsafe_allow_html=True)
 
 # Uso
-set_transparent_background('fondo1.jpg', opacity=0.4)  # Ajusta la opacidad como quieras
+set_transparent_background('fondo1.png', opacity=0.4)  # Ajusta la opacidad como quieras
 # Variables usadas en el modelo 2 (todas las variables)
 todas_vars = list(modelo2.feature_names_in_)
 
