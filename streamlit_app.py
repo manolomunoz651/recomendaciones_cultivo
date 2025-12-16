@@ -6,32 +6,44 @@ import joblib
 modelo2 = joblib.load("modelo_rf_all.pkl")
 le2 = joblib.load("label_encoder_all.pkl")
 
-def set_background(image_file):
+def set_transparent_background(image_file, opacity=0.5):
     """
-    Establece una imagen como fondo de la página completa en Streamlit.
+    Establece una imagen de fondo con transparencia en toda la app de Streamlit.
+    
+    Parámetros:
+    - image_file: ruta al archivo de imagen (ej. 'fondo.jpg')
+    - opacity: valor entre 0.0 (totalmente transparente) y 1.0 (totalmente opaco)
     """
     with open(image_file, "rb") as f:
         image_data = f.read()
     import base64
     encoded = base64.b64encode(image_data).decode()
 
-    page_bg_img = f"""
+    page_bg = f"""
     <style>
-    .stApp {{
+    [data-testid="stAppViewContainer"] {{
+        position: relative;
+    }}
+    [data-testid="stAppViewContainer"]::before {{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         background-image: url("data:image/png;base64,{encoded}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        opacity: {opacity};
+        z-index: -1;
     }}
     </style>
     """
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+    st.markdown(page_bg, unsafe_allow_html=True)
 
-# Usa la función (asegúrate de que la imagen esté en la misma carpeta o da la ruta correcta)
-set_background('fondo.png.png')  # Cambia 'fondo.jpg' por tu archivo de imagen
-
-#st.title("¡Hola! Esta app tiene fondo personalizado")
-
+# Uso
+set_transparent_background('fondo1.jpg', opacity=0.4)  # Ajusta la opacidad como quieras
 # Variables usadas en el modelo 2 (todas las variables)
 todas_vars = list(modelo2.feature_names_in_)
 
