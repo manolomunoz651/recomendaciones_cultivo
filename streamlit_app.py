@@ -6,6 +6,32 @@ import joblib
 modelo2 = joblib.load("modelo_rf_all.pkl")
 le2 = joblib.load("label_encoder_all.pkl")
 
+def set_background(image_file):
+    """
+    Establece una imagen como fondo de la página completa en Streamlit.
+    """
+    with open(image_file, "rb") as f:
+        image_data = f.read()
+    import base64
+    encoded = base64.b64encode(image_data).decode()
+
+    page_bg_img = f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/png;base64,{encoded}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }}
+    </style>
+    """
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
+# Usa la función (asegúrate de que la imagen esté en la misma carpeta o da la ruta correcta)
+set_background('fondo.png')  # Cambia 'fondo.jpg' por tu archivo de imagen
+
+st.title("¡Hola! Esta app tiene fondo personalizado")
+
 # Variables usadas en el modelo 2 (todas las variables)
 todas_vars = list(modelo2.feature_names_in_)
 
